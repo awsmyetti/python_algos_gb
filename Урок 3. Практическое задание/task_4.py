@@ -9,30 +9,30 @@
 Можете условжнить задачу, реализовав ее через ООП
 """
 
+from uuid import uuid4
 from hashlib import sha256
 
 
 class UrlStorage:
     def __init__(self):
         self.url_dict = dict()
+        self.salt = uuid4().hex
 
-    def add_url(self):
-        while True:
-            user_url = input('Введите url:\n')
-            if user_url == 'stop':
-                print('Ввод окончен')
-                break
-            elif user_url not in self.url_dict.keys():
-                salt = input('Введите логин:\n')
-                self.url_dict[user_url] = sha256(user_url.encode('utf-8') + salt.encode('utf-8')).hexdigest()
-                print('Сайт добавлен')
-            else:
-                print('Сайт уже есть в списке')
+    def url_add(self, url):
+        if self.url_dict.get(url):
+            print(f'{url} уже есть в списке')
+        else:
+            self.url_dict[url] = sha256(url.encode() + self.salt.encode()).hexdigest()
+            print('Сайт добавлен')
 
     def __str__(self):
-        return 'Добваленные адреса:\n' + '\n'.join(self.url_dict.keys())
+        return 'Добавленные адреса:\n' + '\n'.join(self.url_dict.keys())
 
 
 test = UrlStorage()
-test.add_url()
+test.url_add('vk.com')
+test.url_add('vk.com')
+test.url_add('mail.ru')
+test.url_add('geekbrains.ru')
+test.url_add('mail.ru')
 print(test)
