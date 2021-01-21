@@ -21,6 +21,7 @@ def recursive_reverse(number):
     return f'{str(number % 10)}{recursive_reverse(number // 10)}'
 
 
+print(recursive_reverse(987))
 num_100 = randint(10000, 1000000)
 num_1000 = randint(1000000, 10000000)
 num_10000 = randint(100000000, 10000000000000)
@@ -53,6 +54,7 @@ def memoize(f):
         else:
             cache[args] = f(*args)
             return cache[args]
+
     return decorate
 
 
@@ -61,6 +63,7 @@ def recursive_reverse_mem(number):
     if number == 0:
         return ''
     return f'{str(number % 10)}{recursive_reverse_mem(number // 10)}'
+
 
 
 print('Оптимизированная функция recursive_reverse_mem')

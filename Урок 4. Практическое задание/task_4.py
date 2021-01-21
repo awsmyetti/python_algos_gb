@@ -37,5 +37,12 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_3():
+    numb = max(array, key=array.count)
+    return f'Чаще всего встречается число {numb}, ' \
+           f'оно появилось в массиве {array.count(numb)} раз(а)'
+
+
 print(func_1())
 print(func_2())
+print(func_3())
